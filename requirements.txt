@@ -1,0 +1,16 @@
+# Core
+openpyxl>=3.1
+Pillow>=10.0
+
+# Video download (public, anonymous fetch — never given browser cookies)
+yt-dlp>=2024.1.1
+
+# Optional: local transcription on Apple Silicon (whisper_transcribe.py).
+# Skip this on non-Apple-Silicon machines; swap in your own transcriber and
+# point whisper_transcribe.py's --mlx-path / --model at it instead.
+mlx-whisper>=0.4; sys_platform == "darwin"
+
+# Optional: macOS-only window screenshot support (capture_page.py).
+pyobjc-framework-Quartz>=10.0; sys_platform == "darwin"
+
+# System (not pip-installable, install separately): ffmpeg / ffprobe on PATH.
