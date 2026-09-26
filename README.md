@@ -1,5 +1,7 @@
 # ig-taste-engine
 
+[![tests](https://github.com/svx2027/ig-taste-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/svx2027/ig-taste-engine/actions/workflows/tests.yml)
+
 Turn **your own saved Instagram reels** into a structured knowledge base you (or an
 AI) can use to understand your taste — the formats, hooks, audio, and themes you
 keep saving — and to generate new content ideas in that same style.
@@ -201,6 +203,30 @@ scene-cut detection instead of grabbing one frame, why visual assets are
 captured by screenshot rather than by pulling image URLs out of the page, and
 the integrity-check habit that catches a silent count mismatch before it
 becomes a silent data-loss bug).
+
+## Tests
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+60 pure-function tests, no browser, no network, no `yt-dlp`/`ffmpeg`/whisper.
+They pin the parts of this pipeline that are easy to get subtly wrong on a
+re-read: the collection-name intent classifier and hashtag/mention
+extraction (`build_combined.py`), the safe-int and collections-list helpers
+shared by the aggregation and taste-profile builders (note `build_master.py`
+deliberately defaults a failed int coercion to `""` while
+`build_aggregations.py`/`taste_profile.py` default to `0` -- both are pinned
+so a refactor can't quietly unify them onto the wrong one), the derived
+shareability band's boundary conditions, the top-N/percentage formatting
+behind every "## Signature" bullet, the djb2 integrity signature `verify_feed.py`
+checks the capture against, and the content-calendar scheduler's constraint
+counter plus its greedy-then-hill-climb sequencer (format-streak and
+audio-spacing rules, including that the scheduler still terminates and keeps
+every concept when no zero-violation ordering exists). Not covered: anything
+that touches the browser, the Instagram page, `yt-dlp`, `ffmpeg`, or local
+Whisper -- those need believable fakes to test meaningfully and aren't pure
+functions.
 
 ## Safety rules (do not weaken)
 
