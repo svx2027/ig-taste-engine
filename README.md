@@ -242,3 +242,15 @@ functions.
 ## License
 
 MIT — see `LICENSE`.
+
+## Related tools
+
+- [livestream-clip-cutter](https://github.com/svx2027/livestream-clip-cutter):
+  a sibling media pipeline on a different platform (YouTube livestreams), with
+  its own verify-by-re-derivation habit.
+- [playlist-extract-pipeline](https://github.com/svx2027/playlist-extract-pipeline):
+  the same capture-then-verify shape, for your own YouTube playlists instead
+  of your own saved Instagram reels — its README's "Adapting this to another
+  platform" section is the worked translation table between the two.
+
+Full index of all public repos: [github.com/svx2027](https://github.com/svx2027).
